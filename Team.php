@@ -1,27 +1,30 @@
 <?php
-
 class Team {
-
-    private $name;
+    private $teamName;
+    private $totalPoints = 0;
     private $totalGoals = 0;
     private $totalGames = 0;
-    private $totalPoints = 0;
 
-    public function __construct($param1)
-    {
-        $this->name = $param1;
+    public function __construct($teamName) {
+        $this->teamName = $teamName;
     }
 
-    public function finalScore($param1, $param2)
-    {
-        $this->totalGoals = $this->totalGoals + $param1;
+    public function finalScore($hGoals, $aGoals) {
+        $this->totalGoals = $this->totalGoals + $hGoals;
         $this->totalGames = $this->totalGames + 1;
 
-        if ($param1 > $param2) {
+        if ($hGoals > $aGoals) {
             $this->totalPoints = $this->totalPoints + 3;
-        }
-        else if ($param1 == $param2) {
+        } elseif ($hGoals == $aGoals) {
             $this->totalPoints = $this->totalPoints + 1;
+        }
+    }
+
+    public function getGoalAverage() {
+        if ($this->totalGames > 0) {
+            return $this->totalGoals / $this->totalGames;
+        } else {
+            return 0;
         }
     }
 }
